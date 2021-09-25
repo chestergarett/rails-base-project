@@ -13,7 +13,7 @@ class BuyOrder < ApplicationRecord
   def match_order
     SellOrder.pending.price_equal(price).quantity_equal(quantity)
   end
-  
+
   def complete_order
     if match_order.any?
       if match_order.first.trades.nil?

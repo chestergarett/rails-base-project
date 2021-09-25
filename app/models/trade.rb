@@ -9,5 +9,5 @@ class Trade < ApplicationRecord
   def total
     price * quantity
   end
-  
+ 
 end
