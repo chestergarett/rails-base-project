@@ -13,11 +13,18 @@ class BuyOrder < ApplicationRecord
   def match_order
     SellOrder.pending.price_equal(price).quantity_equal(quantity)
   end
-
+  
   def complete_order
-    return if match_order.blank?
-
-    trades.create(stock: stock, price: price, quantity: quantity, sell_order: match_order.first)
-    update(status: 1)
+    if match_order.any?
+      if match_order.first.trades.nil?
+        trades(stock: stock, price: price, quantity: quantity, buyer: user.email, buy_order: self)
+      else
+        match_order.first.trades.update(stock: stock, price: price, quantity: quantity, buyer: user.email, buy_order: self)
+      end
+      match_order.first.update(status: 1)
+      update(status: 1)
+    else
+      trades(stock: stock, price: price, quantity: quantity, buyer: user.email, buy_order: self)
+    end
   end
 end

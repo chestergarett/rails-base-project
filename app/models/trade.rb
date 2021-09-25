@@ -1,22 +1,13 @@
 class Trade < ApplicationRecord
   belongs_to :stock
-  belongs_to :buy_order
+  belongs_to :buy_order, optional: true
   belongs_to :sell_order, optional: true
 
   validates :quantity, presence: true
   validates :price, presence: true
 
-  def amount
+  def total
     price * quantity
   end
-
-  def buyer
-    buy_order.user
-  end
-
-  def seller
-    sell_order.user
-  rescue NoMethodError
-    nil
-  end
+  
 end

@@ -6,7 +6,7 @@
                 <a class="nav-link active" href="#">My Portfolio</a>
             </li>
             <li class="nav-item">
-                <%=link_to "Records", transactions_portfolio_index_path, class: "nav-link"%>
+                <%=link_to "Completed Orders", transactions_portfolio_index_path, class: "nav-link"%>
             </li>
             <li class="nav-item">
                 <%=link_to "Pending Orders", pending_orders_portfolio_index_path, class: "nav-link"%>
@@ -29,18 +29,18 @@
                 </tr>
             </thead>
             <tbody>
-                <%if fulfilled_orders.any?%>
-                    <% fulfilled_orders.each do |f|%>
+                <%if portfolio.any?%>
+                    <% portfolio.each do |f|%>
                     <tr>
-                        <th scope="row"><%=f.stock.ticker%></th>
+                        <th scope="row"><%=f.buy_order.stock.ticker%></th>
                         <td>Long</td>
-                        <td><%=f.stock.last_price%></td>
+                        <td><%=f.buy_order.stock.last_price%></td>
                         <td><%=f.price%></td>
                         <td><%=f.quantity.to_i%></td>
                         <td><%=f.total%></td>
-                        <td>101,000</td>
-                        <td>21,000</td>
-                        <td>21%</td>
+                        <td><%=f.stock.last_price * f.quantity%></td>
+                        <td><%=(f.stock.last_price * f.quantity)-f.total%></td>
+                        <td><%=number_to_percentage(((f.stock.last_price * f.quantity)-f.total)/f.total)%></td>
                     </tr>
                     <%end%>
                 <%end%>

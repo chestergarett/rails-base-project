@@ -15,10 +15,17 @@ class SellOrder < ApplicationRecord
   end
 
   def complete_order
-    return if match_order.blank?
-
-    trades.create(stock: stock, price: price, quantity: quantity, buy_order: match_order.first)
-    update(status: 1)
+    if match_order.any?
+      if match_order.first.trades.nil?
+        trades.create(stock: stock, price: price, quantity: quantity, seller: user.email, sell_order: self)
+      else
+        match_order.first.trades.update(stock: stock, price: price, quantity: quantity, seller: user.email, sell_order: self)
+      end
+      match_order.first.update(status: 1)
+      update(status: 1)
+    else
+      trades.create(stock: stock, price: price, quantity: quantity, seller: user.email, sell_order: self)
+    end
   end
 
   def enough_quantity?
