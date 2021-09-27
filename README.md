@@ -19,6 +19,8 @@ When registering, user cannot directly use app, instead it needs approval from a
 
 ![image](https://user-images.githubusercontent.com/71489331/134941321-8c6cfc2e-54d3-40ff-ab2e-19e98a35c14f.png)
 
+![image](https://user-images.githubusercontent.com/71489331/134942587-358eac23-d518-48c1-9a2b-9c0b3a652cf0.png)
+
 To trade, proceed to Trades section in the NAVbar, choose either classic or premium. Search for appropriate stock.
 ![image](https://user-images.githubusercontent.com/71489331/134941461-d382d8f3-c38d-4ef1-b6b0-376dba79cebc.png)
 
